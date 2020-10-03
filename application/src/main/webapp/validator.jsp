@@ -2,12 +2,12 @@
 <header>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-  <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.1.1/jsoneditor.css">
-  <script defer src="https://code.getmdl.io/1.3.0/material.js"></script>
-  <script defer src="script.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.1.1/jsoneditor.js"></script>
+  <script defer src="https://code.getmdl.io/1.3.0/material.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="script.js"></script>
 </header>
 <body>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
