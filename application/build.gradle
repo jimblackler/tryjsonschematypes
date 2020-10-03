@@ -1,0 +1,18 @@
+plugins {
+    id 'com.google.cloud.tools.appengine' version '2.4.1'
+    id 'java'
+    id 'war'
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+group = 'net.jimblackler.tryjsonschematypes'
+version = '0.3'
+
+dependencies {
+    implementation 'com.google.appengine:appengine-api-1.0-sdk:1.9.82'
+    implementation 'javax.servlet:javax.servlet-api:4.0.1'
+    implementation 'javax.servlet.jsp.jstl:jstl-api:1.2'
+    implementation 'org.apache.taglibs:taglibs-standard-spec:1.2.5'
+}
