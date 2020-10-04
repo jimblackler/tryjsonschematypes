@@ -4,8 +4,12 @@
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.1.1/jsoneditor.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/getmdl-select/2.0.1/getmdl-select.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.1.1/jsoneditor.js"></script>
-  <script defer src="https://code.getmdl.io/1.3.0/material.js"></script>
+  <script src="https://code.getmdl.io/1.3.0/material.js"></script>
+  <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/getmdl-select/2.0.1/getmdl-select.min.js"></script>
   <link rel="stylesheet" href="styles.css">
   <script defer src="script.js"></script>
 </header>
@@ -55,7 +59,25 @@
           </div>
         </div>
       </div>
-      <div class="mdl-cell mdl-cell--6-col" id="jsoneditor">
+      <div class="mdl-cell mdl-cell--6-col">
+        <div
+            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+          <input type="text" value="" class="mdl-textfield__input" id="sample6" readonly>
+          <input type="hidden" value="" name="sample6">
+          <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+          <label for="sample6" class="mdl-textfield__label">Country</label>
+          <ul for="sample6" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+            <li class="mdl-menu__item" data-val="BY" data-selected="true">Belarus</li>
+            <li class="mdl-menu__item" data-val="BR">Brazil</li>
+            <li class="mdl-menu__item" data-val="ES">Estonia</li>
+            <li class="mdl-menu__item" data-val="FI">Finland</li>
+            <li class="mdl-menu__item" data-val="FR">France</li>
+            <li class="mdl-menu__item" data-val="DE">Germany</li>
+            <li class="mdl-menu__item" data-val="PL">Poland</li>
+            <li class="mdl-menu__item" data-val="RU">Russia</li>
+          </ul>
+        </div>
+        <div id="jsoneditor"></div>
       </div>
 
       <div class="mdl-cell mdl-cell--6-col">
