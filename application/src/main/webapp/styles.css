@@ -1,9 +1,24 @@
-.full-width {
-  width: 100%;
+
+.noncard {
+  /* Look similar to a card design without having to use a card */
+  padding: 32px;
 }
 
-.overflow-visible {
-  overflow: visible;
+.noncard.compact {
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.noncard > h4 {
+  font-weight: 300;
+}
+
+.noncard > p {
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  color: rgba(0,0,0,.54);
 }
 
 .ace_gutter {
