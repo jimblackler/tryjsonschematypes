@@ -23,3 +23,16 @@ function initJsonEditor(container) {
 
 initJsonEditor(document.getElementById("jsoneditor0"));
 initJsonEditor(document.getElementById("jsoneditor1"));
+
+fetch("allDemos.json")
+    .then(response => response.json())
+    .then(json => {
+      const demoList = document.getElementById("demoList");
+      json.forEach(element => {
+        const li = document.createElement("li");
+        li.classList.add("mdl-menu__item");
+        li.setAttribute("data-val", element);
+        li.appendChild(document.createTextNode(element));
+        demoList.appendChild(li);
+      });
+    });

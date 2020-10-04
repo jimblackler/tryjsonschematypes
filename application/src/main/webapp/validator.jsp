@@ -40,31 +40,18 @@
       <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
         <div class="noncard mdl-shadow--2dp">
           <p>An online application of
-            <a href="https://github.com/jimblackler/jsonschematypes/tree/master/library">jsonschemafriend</a>
-          a <a href="https://json-schema.org/">JSON Schema</a> Validator library written in Java by Jim Blackler. Paste your own schema
-          and document for validation in the editors below, or choose a demo.</p>
+            <a href="https://github.com/jimblackler/jsonschematypes/tree/master/library">
+              jsonschemafriend</a> a <a href="https://json-schema.org/">JSON Schema</a> Validator
+            library written in Java by Jim Blackler. Paste your own schema and document for
+            validation in the editors below, or choose a demo from the
+            <a href="https://www.schemastore.org/json/">JSON Schema Store</a>.</p>
           <div
               class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height metaschema-textfield">
             <input type="text" value="" class="mdl-textfield__input" id="demo" readonly>
             <input type="hidden" value="" name="demo">
             <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
             <label for="demo" class="mdl-textfield__label">Demo</label>
-            <ul for="demo" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-              <li class="mdl-menu__item" data-val="http://json-schema.org/draft-03/schema#">
-                http://json-schema.org/draft-03/schema#
-              </li>
-              <li class="mdl-menu__item" data-val="http://json-schema.org/draft-04/schema#">
-                http://json-schema.org/draft-04/schema#
-              </li>
-              <li class="mdl-menu__item" data-val="http://json-schema.org/draft-06/schema#">
-                http://json-schema.org/draft-06/schema#
-              </li>
-              <li class="mdl-menu__item" data-val="http://json-schema.org/draft-07/schema#"
-                  data-selected="true">http://json-schema.org/draft-07/schema#
-              </li>
-              <li class="mdl-menu__item" data-val="https://json-schema.org/draft/2019-09/schema">
-                https://json-schema.org/draft/2019-09/schema
-              </li>
+            <ul for="demo" class="mdl-menu mdl-menu--bottom-left mdl-js-menu" id="demoList">
             </ul>
           </div>
         </div>
