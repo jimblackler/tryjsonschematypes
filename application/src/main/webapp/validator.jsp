@@ -5,14 +5,14 @@
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/getmdl-select/2.0.1/getmdl-select.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
-  <script src="https://code.getmdl.io/1.3.0/material.js"></script>
-  <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/getmdl-select/2.0.1/getmdl-select.min.js"></script>
   <link rel="stylesheet" href="styles.css">
-  <script defer src="script.js"></script>
 </head>
 <body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+<script src="https://code.getmdl.io/1.3.0/material.js"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/getmdl-select/2.0.1/getmdl-select.min.js"></script>
+<script defer src="script.js"></script>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
