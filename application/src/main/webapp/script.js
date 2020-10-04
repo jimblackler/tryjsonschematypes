@@ -1,7 +1,7 @@
 function initJsonEditor(container) {
   new JSONEditor(container, {
     mode: "code",
-    modes: ["tree", "view", "code", "text"]
+    modes: ["tree", "code"]
   }).set({
     "Array": [1, 2, 3],
     "Boolean": true,
