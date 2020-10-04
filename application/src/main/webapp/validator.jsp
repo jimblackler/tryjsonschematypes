@@ -77,10 +77,13 @@
             <li class="mdl-menu__item" data-val="RU">Russia</li>
           </ul>
         </div>
-        <div id="jsoneditor"></div>
+        <div id="jsoneditor0"></div>
       </div>
 
       <div class="mdl-cell mdl-cell--6-col">
+        <div id="jsoneditor1"></div>
+      </div>
+      <div class="mdl-cell mdl-cell--12-col">
         <section class="mdl-layout__tab-panel is-active" id="tab-1">
           <div class="page-content">1</div>
         </section>

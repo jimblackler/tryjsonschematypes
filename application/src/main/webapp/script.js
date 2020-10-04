@@ -1,18 +1,16 @@
-const container = document.getElementById("jsoneditor");
-const options = {
-  mode: "code",
-  modes: ["tree", "view", "code", "text"]
-};
-const editor = new JSONEditor(container, options);
+function initJsonEditor(container) {
+  new JSONEditor(container, {
+    mode: "code",
+    modes: ["tree", "view", "code", "text"]
+  }).set({
+    "Array": [1, 2, 3],
+    "Boolean": true,
+    "Null": null,
+    "Number": 123,
+    "Object": {"a": "b", "c": "d"},
+    "String": "Hello World"
+  });
+}
 
-const initialJson = {
-  "Array": [1, 2, 3],
-  "Boolean": true,
-  "Null": null,
-  "Number": 123,
-  "Object": {"a": "b", "c": "d"},
-  "String": "Hello World"
-};
-editor.set(initialJson);
-
-const updatedJson = editor.get();
+initJsonEditor(document.getElementById("jsoneditor0"));
+initJsonEditor(document.getElementById("jsoneditor1"));
