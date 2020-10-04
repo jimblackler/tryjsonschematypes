@@ -38,7 +38,7 @@
   </div>
   <main class="mdl-layout__content">
     <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--12-col">
+      <div class="mdl-cell mdl-cell--8-col">
         <div class="mdl-card mdl-shadow--2dp full-width">
           <div class="mdl-card__title">
             <h2 class="mdl-card__title-text">Online JSON validator</h2>
@@ -51,6 +51,21 @@
             reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
             sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
             est laborum.
+          </div>
+          <div class="mdl-card__actions mdl-card--border">
+            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+              Get Started
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="mdl-cell mdl-cell--4-col">
+        <div class="mdl-card mdl-shadow--2dp full-width">
+          <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">Online JSON validator</h2>
+          </div>
+          <div class="mdl-card__supporting-text">
+            Try a demo blah blah
           </div>
           <div class="mdl-card__actions mdl-card--border">
             <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
