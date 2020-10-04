@@ -36,64 +36,65 @@
   </div>
   <main class="mdl-layout__content">
     <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--8-col">
-        <div class="mdl-card mdl-shadow--2dp full-width">
+      <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
+        <div class="mdl-card mdl-shadow--2dp full-width overflow-visible">
           <div class="mdl-card__title">
-            <h2 class="mdl-card__title-text">Online JSON validator</h2>
+            <h2 class="mdl-card__title-text">Schema</h2>
           </div>
           <div class="mdl-card__supporting-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt
-            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-            sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-            est laborum.
+            <a href="https://json-schema.org/">JSON Schema</a> with which to validate a document.
           </div>
           <div class="mdl-card__actions mdl-card--border">
-            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-              Get Started
-            </a>
+            <div
+                class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height metaschema-textfield">
+              <input type="text" value="" class="mdl-textfield__input" id="sample6" readonly>
+              <input type="hidden" value="" name="sample6">
+              <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+              <label for="sample6" class="mdl-textfield__label">Metaschema</label>
+              <ul for="sample6" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                <li class="mdl-menu__item" data-val="http://json-schema.org/draft-03/schema#">
+                  http://json-schema.org/draft-03/schema#
+                </li>
+                <li class="mdl-menu__item" data-val="http://json-schema.org/draft-04/schema#">
+                  http://json-schema.org/draft-04/schema#
+                </li>
+                <li class="mdl-menu__item" data-val="http://json-schema.org/draft-06/schema#">
+                  http://json-schema.org/draft-06/schema#
+                </li>
+                <li class="mdl-menu__item" data-val="http://json-schema.org/draft-07/schema#"
+                    data-selected="true">http://json-schema.org/draft-07/schema#
+                </li>
+                <li class="mdl-menu__item" data-val="https://json-schema.org/draft/2019-09/schema">
+                  https://json-schema.org/draft/2019-09/schema
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
-      <div class="mdl-cell mdl-cell--4-col">
+      <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
         <div class="mdl-card mdl-shadow--2dp full-width">
           <div class="mdl-card__title">
-            <h2 class="mdl-card__title-text">Online JSON validator</h2>
+            <h2 class="mdl-card__title-text">Document</h2>
           </div>
           <div class="mdl-card__supporting-text">
-            Try a demo blah blah
+            JSON document to validate.
           </div>
           <div class="mdl-card__actions mdl-card--border">
-            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-              Get Started
-            </a>
+            <button
+                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+              Validate
+            </button>
           </div>
         </div>
       </div>
-      <div class="mdl-cell mdl-cell--6-col">
-        <div
-            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
-          <input type="text" value="" class="mdl-textfield__input" id="sample6" readonly>
-          <input type="hidden" value="" name="sample6">
-          <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
-          <label for="sample6" class="mdl-textfield__label">Country</label>
-          <ul for="sample6" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-            <li class="mdl-menu__item" data-val="BY" data-selected="true">Belarus</li>
-            <li class="mdl-menu__item" data-val="BR">Brazil</li>
-            <li class="mdl-menu__item" data-val="ES">Estonia</li>
-            <li class="mdl-menu__item" data-val="FI">Finland</li>
-            <li class="mdl-menu__item" data-val="FR">France</li>
-            <li class="mdl-menu__item" data-val="DE">Germany</li>
-            <li class="mdl-menu__item" data-val="PL">Poland</li>
-            <li class="mdl-menu__item" data-val="RU">Russia</li>
-          </ul>
-        </div>
+    </div>
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
         <div id="jsoneditor0"></div>
       </div>
 
-      <div class="mdl-cell mdl-cell--6-col">
+      <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
         <div id="jsoneditor1"></div>
       </div>
       <div class="mdl-cell mdl-cell--12-col">

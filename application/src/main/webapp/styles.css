@@ -2,6 +2,19 @@
   width: 100%;
 }
 
+.overflow-visible {
+  overflow: visible;
+}
+
+.ace_gutter {
+  /* Working around a clash with getmdl-select */
+  z-index: 0;
+}
+
+.metaschema-textfield {
+  width: 400px;
+}
+
 #jsoneditor0 {
   height: 600px;
 }
