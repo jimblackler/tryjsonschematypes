@@ -36,10 +36,18 @@ document.getElementById('demo').addEventListener('change', evt => {
 });
 
 document.getElementById('validate').addEventListener('click', evt => {
-  const validateFetch = new URL('validate', document.location);
-  validateFetch.searchParams.append('schema', schemaEditor.getValue());
-  validateFetch.searchParams.append('document', documentEditor.getValue());
-  fetch(validateFetch).then(response => response.json()).then(json => {
-    alert(JSON.stringify(json, null, 2));
+  const params = new URLSearchParams();
+  params.append('schema', schemaEditor.getValue());
+  params.append('document', documentEditor.getValue());
+
+  fetch('validate', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: params.toString()
   })
+      .then(response => response.json())
+      .then(json => {
+        alert(JSON.stringify(json, null, 2));
+      })
+      .catch(err => alert(err));
 });

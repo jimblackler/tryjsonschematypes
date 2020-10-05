@@ -4,7 +4,6 @@ import static net.jimblackler.jsonschemafriend.DocumentUtils.parseJson;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,8 +21,8 @@ public class Validate extends HttpServlet {
   public Validate() {}
 
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws IOException, ServletException {
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
     JSONObject out;
     response.setContentType("text/json");
     try {
