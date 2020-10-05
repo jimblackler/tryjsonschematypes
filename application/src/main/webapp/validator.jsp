@@ -3,6 +3,8 @@
   <title>Jim Blackler's JSON Schema tools</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <link rel='stylesheet'
+        href="https://www.gstatic.com/external_hosted/dialog_polyfill/dialog-polyfill.css">
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/getmdl-select/2.0.1/getmdl-select.min.css">
   <link rel="stylesheet" href="styles.css">
@@ -12,7 +14,17 @@
 <script src="https://code.getmdl.io/1.3.0/material.js"></script>
 <script
     src="https://cdnjs.cloudflare.com/ajax/libs/getmdl-select/2.0.1/getmdl-select.min.js"></script>
+<script src="https://www.gstatic.com/external_hosted/dialog_polyfill/dialog-polyfill.js"></script>
 <script defer src="script.js"></script>
+<dialog class="mdl-dialog">
+  <h4 class="mdl-dialog__title" id="result">Document did not validate</h4>
+  <div class="mdl-dialog__content" id="jsonResults">
+  </div>
+
+  <div class="mdl-dialog__actions">
+    <button type="button" class="mdl-button close">Close</button>
+  </div>
+</dialog>
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
@@ -54,6 +66,8 @@
             <ul for="demo" class="mdl-menu mdl-menu--bottom-left mdl-js-menu" id="demoList">
             </ul>
           </div>
+          <div class="mdl-spinner mdl-js-spinner is-active aligned-spinner" id="demoProgress">
+          </div>
         </div>
       </div>
       <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
@@ -89,10 +103,14 @@
       <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
         <div class="noncard compact">
           <h4>Document</h4>
-          <button id="validate"
-              class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-            Validate
-          </button>
+          <div>
+            <button id="validate"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+              Validate
+            </button>
+            <div class="mdl-spinner mdl-js-spinner is-active aligned-spinner" id="validateProgress">
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.jimblackler.jsonschemafriend.GenerationException;
 import net.jimblackler.jsonschemafriend.Schema;
 import net.jimblackler.jsonschemafriend.SchemaStore;
+import net.jimblackler.jsonschemafriend.StandardGenerationException;
 import net.jimblackler.jsonschemafriend.Validator;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,14 +24,22 @@ public class Validate extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    JSONObject out;
+    JSONObject out = new JSONObject();
     response.setContentType("text/json");
     try {
       Object schemaObject = parseJson(request.getParameter("schema"));
       Object documentObject = parseJson(request.getParameter("document"));
       SchemaStore schemaStore = new SchemaStore();
       Schema schema = schemaStore.loadSchema(schemaObject);
-      out = new Validator().validateWithOutput(schemaStore, schema, documentObject);
+      JSONObject validation =
+          new Validator().validateWithOutput(schemaStore, schema, documentObject);
+      out.put("result",
+          validation.getBoolean("valid") ? "Document validated against schema"
+                                         : "Document did not validate against schema");
+      out.put("validation", validation);
+    } catch (StandardGenerationException e) {
+      out.put("result", "Schema did not validate against metaschema");
+      out.put("validation", e.getStandardOutput());
     } catch (JSONException | GenerationException e) {
       throw new ServletException(e);
     }

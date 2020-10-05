@@ -1,3 +1,12 @@
+const dialog = document.querySelector('dialog');
+if (!dialog.showModal) {
+  dialogPolyfill.registerDialog(dialog);
+}
+
+dialog.querySelector('.close').addEventListener('click', function() {
+  dialog.close();
+});
+
 /**
  * Initialize an Ace editor
  * @param container {HTMLElement}
@@ -11,8 +20,11 @@ function initJsonEditor(container) {
   });
 }
 
-let schemaEditor = initJsonEditor(document.getElementById('schemaEditor'));
-let documentEditor = initJsonEditor(document.getElementById('documentEditor'));
+const schemaEditor = initJsonEditor(document.getElementById('schemaEditor'));
+const documentEditor =
+    initJsonEditor(document.getElementById('documentEditor'));
+const jsonResults = initJsonEditor(document.getElementById('jsonResults'));
+jsonResults.setReadOnly(true);
 
 fetch('allDemos.json').then(response => response.json()).then(json => {
   const demoList = document.getElementById('demoList');
@@ -29,17 +41,23 @@ fetch('allDemos.json').then(response => response.json()).then(json => {
 document.getElementById('demo').addEventListener('change', evt => {
   const demoFetch = new URL('demoData', document.location);
   demoFetch.searchParams.append('demo', evt.target.value);
-  fetch(demoFetch).then(response => response.json()).then(json => {
-    schemaEditor.setValue(JSON.stringify(json.schema, null, '\t'));
-    documentEditor.setValue(JSON.stringify(json.document, null, '\t'));
-  })
+  const demoProgress = document.getElementById('demoProgress');
+  demoProgress.style.visibility = 'visible';
+  fetch(demoFetch)
+      .then(response => response.json())
+      .then(json => {
+        schemaEditor.setValue(JSON.stringify(json.schema, null, '\t'), -1);
+        documentEditor.setValue(JSON.stringify(json.document, null, '\t'), -1);
+      })
+      .finally(() => demoProgress.style.visibility = 'hidden');
 });
 
 document.getElementById('validate').addEventListener('click', evt => {
   const params = new URLSearchParams();
   params.append('schema', schemaEditor.getValue());
   params.append('document', documentEditor.getValue());
-
+  const validateProgress = document.getElementById('validateProgress');
+  validateProgress.style.visibility = 'visible';
   fetch('validate', {
     method: 'POST',
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -47,7 +65,10 @@ document.getElementById('validate').addEventListener('click', evt => {
   })
       .then(response => response.json())
       .then(json => {
-        alert(JSON.stringify(json, null, 2));
+        document.getElementById('result').innerText = json.result;
+        jsonResults.setValue(JSON.stringify(json.validation, null, '\t'), -1);
+        dialog.showModal();
       })
-      .catch(err => alert(err));
+      .catch(err => alert(err))
+      .finally(() => validateProgress.style.visibility = 'hidden');
 });
