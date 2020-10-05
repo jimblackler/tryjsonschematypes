@@ -25,13 +25,21 @@ fetch('allDemos.json').then(response => response.json()).then(json => {
   });
 });
 
-document.getElementById('demo').addEventListener(
-    'change',
-    evt => {fetch(`demoData?demo=${encodeURIComponent(evt.target.value)}`)
-                .then(response => response.json())
-                .then(json => {
-                  schemaEditor.setValue(
-                      JSON.stringify(json.schema, null, '\t'));
-                  documentEditor.setValue(
-                      JSON.stringify(json.document, null, '\t'));
-                })});
+
+document.getElementById('demo').addEventListener('change', evt => {
+  const demoFetch = new URL('demoData', document.location);
+  demoFetch.searchParams.append('demo', evt.target.value);
+  fetch(demoFetch).then(response => response.json()).then(json => {
+    schemaEditor.setValue(JSON.stringify(json.schema, null, '\t'));
+    documentEditor.setValue(JSON.stringify(json.document, null, '\t'));
+  })
+});
+
+document.getElementById('validate').addEventListener('click', evt => {
+  const validateFetch = new URL('validate', document.location);
+  validateFetch.searchParams.append('schema', schemaEditor.getValue());
+  validateFetch.searchParams.append('document', documentEditor.getValue());
+  fetch(validateFetch).then(response => response.json()).then(json => {
+    alert(JSON.stringify(json, null, 2));
+  })
+});

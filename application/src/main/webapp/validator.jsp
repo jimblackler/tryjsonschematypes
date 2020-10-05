@@ -89,7 +89,7 @@
       <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
         <div class="noncard compact">
           <h4>Document</h4>
-          <button
+          <button id="validate"
               class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
             Validate
           </button>
