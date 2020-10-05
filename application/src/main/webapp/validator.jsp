@@ -98,11 +98,11 @@
     </div>
     <div class="mdl-grid">
       <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
-        <div id="jsoneditor0"></div>
+        <div id="schemaEditor"></div>
       </div>
 
       <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
-        <div id="jsoneditor1"></div>
+        <div id="documentEditor"></div>
       </div>
       <div class="mdl-cell mdl-cell--12-col">
         <section class="mdl-layout__tab-panel is-active" id="tab-1">
