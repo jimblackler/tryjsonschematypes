@@ -63,12 +63,16 @@ document.getElementById('validate').addEventListener('click', evt => {
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     body: params.toString()
   })
-      .then(response => response.json())
-      .then(json => {
-        document.getElementById('result').innerText = json.result;
-        jsonResults.setValue(JSON.stringify(json.validation, null, '\t'), -1);
-        dialog.showModal();
-      })
-      .catch(err => alert(err))
+      .then(
+          response => response.json().then(
+              response.ok ?
+                  json => {
+                    document.getElementById('result').innerText = json.result;
+                    jsonResults.setValue(
+                        JSON.stringify(json.validation, null, '\t'), -1);
+                    dialog.showModal();
+                  } :
+                  json => {throw new Error(json.message);}))
+      .catch(err => alert(err.message))
       .finally(() => validateProgress.style.visibility = 'hidden');
 });
