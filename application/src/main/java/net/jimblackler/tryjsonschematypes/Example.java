@@ -28,8 +28,8 @@ public class Example extends HttpServlet {
           schemaStore.loadSchema(URI.create("https://json.schemastore.org/chrome-manifest"));
       writer.println("<ul>");
       JSONObject document = new JSONObject();
-      Validator.validate(
-          schema, document, error -> true, error -> writer.println("<li>" + error + " </li>"));
+      new Validator().validate(
+          schema, document, error -> writer.println("<li>" + error + " </li>"));
       writer.println("</ul>");
     } catch (GenerationException e) {
       throw new ServletException(e);
