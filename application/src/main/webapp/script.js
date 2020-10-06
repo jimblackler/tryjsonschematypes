@@ -1,11 +1,20 @@
-const dialog = document.querySelector('dialog');
-if (!dialog.showModal) {
-  dialogPolyfill.registerDialog(dialog);
+const jsonDialog = document.getElementById('jsonDialog');
+if (!jsonDialog.showModal) {
+  dialogPolyfill.registerDialog(jsonDialog);
 }
-
-dialog.querySelector('.close').addEventListener('click', function() {
-  dialog.close();
+jsonDialog.querySelector('.close').addEventListener('click', function() {
+  jsonDialog.close();
 });
+
+const errorDialog = document.getElementById('errorDialog');
+if (!errorDialog.showModal) {
+  dialogPolyfill.registerDialog(errorDialog);
+}
+errorDialog.querySelector('.close').addEventListener('click', function() {
+  errorDialog.close();
+});
+
+
 
 /**
  * Initialize an Ace editor
@@ -70,9 +79,14 @@ document.getElementById('validate').addEventListener('click', evt => {
                     document.getElementById('result').innerText = json.result;
                     jsonResults.setValue(
                         JSON.stringify(json.validation, null, '\t'), -1);
-                    dialog.showModal();
+                    jsonDialog.showModal();
                   } :
-                  json => {throw new Error(json.message);}))
-      .catch(err => alert(err.message))
+                  json => {
+                    throw new Error(json.message);
+                  }))
+      .catch(err => {
+        document.getElementById('errorMessage').innerText = err.message;
+        errorDialog.showModal();
+      })
       .finally(() => validateProgress.style.visibility = 'hidden');
 });

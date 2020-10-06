@@ -16,11 +16,18 @@
     src="https://cdnjs.cloudflare.com/ajax/libs/getmdl-select/2.0.1/getmdl-select.min.js"></script>
 <script src="https://www.gstatic.com/external_hosted/dialog_polyfill/dialog-polyfill.js"></script>
 <script defer src="script.js"></script>
-<dialog class="mdl-dialog">
+<dialog class="mdl-dialog" id="jsonDialog">
   <h4 class="mdl-dialog__title" id="result">Document did not validate</h4>
   <div class="mdl-dialog__content" id="jsonResults">
   </div>
-
+  <div class="mdl-dialog__actions">
+    <button type="button" class="mdl-button close">Close</button>
+  </div>
+</dialog>
+<dialog class="mdl-dialog" id="errorDialog">
+  <h4 class="mdl-dialog__title">An error occurred</h4>
+  <div class="mdl-dialog__content" id="errorMessage">
+  </div>
   <div class="mdl-dialog__actions">
     <button type="button" class="mdl-button close">Close</button>
   </div>
