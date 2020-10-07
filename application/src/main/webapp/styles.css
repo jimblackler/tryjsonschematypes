@@ -50,7 +50,7 @@
 }
 
 .mdl-dialog {
-  width: fit-content;
+  width: max-content;
 }
 
 .mdl-dialog__title {
