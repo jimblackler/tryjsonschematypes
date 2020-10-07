@@ -61,9 +61,9 @@
           <p>An online application of
             <a href="https://github.com/jimblackler/jsonschematypes/tree/master/library">
               jsonschemafriend</a> a <a href="https://json-schema.org/">JSON Schema</a> Validator
-            library written in Java by Jim Blackler. Paste your own schema and document for
-            validation in the editors below, or choose a demo from the
-            <a href="https://www.schemastore.org/json/">JSON Schema Store</a>.</p>
+            library written in Java by <a href="mailto:jimblackler@gmail.com">Jim Blackler</a>.
+            Paste your own schema and document for validation in the editors below, or choose a demo
+            from the <a href="https://www.schemastore.org/json/">JSON Schema Store</a>.</p>
           <div
               class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height metaschema-textfield">
             <input type="text" value="" class="mdl-textfield__input" id="demo" readonly>
