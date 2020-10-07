@@ -14,8 +14,12 @@ import net.jimblackler.jsonschemafriend.SchemaStore;
 import net.jimblackler.jsonschemafriend.Validator;
 import org.json.JSONObject;
 
-@WebServlet(name = "Example", value = "/example")
+@WebServlet(value = "/example")
 public class Example extends HttpServlet {
+  public static String getInformation() {
+    return "Here's even more information";
+  }
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException, ServletException {
@@ -34,9 +38,5 @@ public class Example extends HttpServlet {
     } catch (GenerationException e) {
       throw new ServletException(e);
     }
-  }
-
-  public static String getInformation() {
-    return "Here's even more information";
   }
 }
