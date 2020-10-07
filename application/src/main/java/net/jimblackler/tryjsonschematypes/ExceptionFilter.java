@@ -1,7 +1,5 @@
 package net.jimblackler.tryjsonschematypes;
 
-import org.json.JSONObject;
-
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -11,6 +9,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
+import org.json.JSONObject;
 
 @WebFilter("*")
 public class ExceptionFilter implements Filter {
@@ -21,7 +20,11 @@ public class ExceptionFilter implements Filter {
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
       throws IOException {
     try {
-      chain.doFilter(request, response);
+      try {
+        chain.doFilter(request, response);
+      } catch (Throwable ex) {
+        throw new ServletException(ex);
+      }
     } catch (ServletException ex) {
       JSONObject structuredError = new JSONObject();
       structuredError.put("message", ex.getMessage());
