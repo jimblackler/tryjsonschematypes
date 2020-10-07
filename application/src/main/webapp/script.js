@@ -53,10 +53,21 @@ document.getElementById('demo').addEventListener('change', evt => {
   const demoProgress = document.getElementById('demoProgress');
   demoProgress.style.visibility = 'visible';
   fetch(demoFetch)
-      .then(response => response.json())
-      .then(json => {
-        schemaEditor.setValue(JSON.stringify(json.schema, null, '\t'), -1);
-        documentEditor.setValue(JSON.stringify(json.document, null, '\t'), -1);
+      .then(
+          response => response.json().then(
+              response.ok ?
+                  json => {
+                    schemaEditor.setValue(
+                        JSON.stringify(json.schema, null, '\t'), -1);
+                    documentEditor.setValue(
+                        JSON.stringify(json.document, null, '\t'), -1);
+                  } :
+                  json => {
+                    throw new Error(json.message);
+                  }))
+      .catch(err => {
+        document.getElementById('errorMessage').innerText = err.message;
+        errorDialog.showModal();
       })
       .finally(() => demoProgress.style.visibility = 'hidden');
 });
