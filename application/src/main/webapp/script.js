@@ -12,6 +12,19 @@ function withErrorHandling(promise, extracted) {
       });
 }
 
+/**
+ * Initialize an Ace editor
+ * @param container {HTMLElement}
+ * @return The Ace editor.
+ */
+function initJsonEditor(container) {
+  return ace.edit(container, {
+    mode: 'ace/mode/json',
+    theme: 'ace/theme/crimson_editor',
+    fontSize: '14px'
+  });
+}
+
 const jsonDialog = document.getElementById('jsonDialog');
 if (!jsonDialog.showModal) {
   dialogPolyfill.registerDialog(jsonDialog);
@@ -30,18 +43,6 @@ errorDialog.querySelector('.close').addEventListener('click', function() {
   errorDialog.close();
 });
 
-/**
- * Initialize an Ace editor
- * @param container {HTMLElement}
- * @return The Ace editor.
- */
-function initJsonEditor(container) {
-  return ace.edit(container, {
-    mode: 'ace/mode/json',
-    theme: 'ace/theme/crimson_editor',
-    fontSize: '14px'
-  });
-}
 
 const schemaEditor = initJsonEditor(document.getElementById('schemaEditor'));
 const documentEditor =
@@ -52,27 +53,30 @@ jsonResults.setReadOnly(true);
 const demoSelector = document.getElementById('demoSelector');
 const demoProgress = document.getElementById('demoProgress');
 demoProgress.style.visibility = 'visible';
-withErrorHandling(fetch('allDemos.json'), json => {
-  const demoList = document.getElementById('demoList');
-  json.forEach(element => {
-    const li = document.createElement('li');
-    li.classList.add('mdl-menu__item');
-    li.setAttribute('data-val', element);
-    li.appendChild(document.createTextNode(element));
-    demoList.appendChild(li);
-  });
-  demoSelector.style.visibility = 'visible';
-}).finally(demoProgress.style.visibility = 'hidden');
 
-document.getElementById('demo').addEventListener('change', evt => {
-  const demoFetch = new URL('demoData', document.location);
-  demoFetch.searchParams.append('demo', evt.target.value);
-  demoProgress.style.visibility = 'visible';
-  withErrorHandling(fetch(demoFetch), json => {
-    schemaEditor.setValue(JSON.stringify(json.schema, null, '\t'), -1);
-    documentEditor.setValue(JSON.stringify(json.document, null, '\t'), -1);
-  }).finally(() => demoProgress.style.visibility = 'hidden');
-});
+window.onload = () => {
+  withErrorHandling(fetch('allDemos.json'), json => {
+    const demoList = document.getElementById('demoList');
+    json.forEach(element => {
+      const li = document.createElement('li');
+      li.classList.add('mdl-menu__item');
+      li.setAttribute('data-val', element);
+      li.appendChild(document.createTextNode(element));
+      demoList.appendChild(li);
+    });
+    getmdlSelect.init('#demoSelector');
+    document.getElementById('demo').addEventListener('change', evt => {
+      const demoFetch = new URL('demoData', document.location);
+      demoFetch.searchParams.append('demo', evt.target.value);
+      demoProgress.style.visibility = 'visible';
+      withErrorHandling(fetch(demoFetch), json => {
+        schemaEditor.setValue(JSON.stringify(json.schema, null, '\t'), -1);
+        documentEditor.setValue(JSON.stringify(json.document, null, '\t'), -1);
+      }).finally(() => demoProgress.style.visibility = 'hidden');
+    });
+    demoSelector.style.visibility = 'visible';
+  }).finally(demoProgress.style.visibility = 'hidden');
+};
 
 document.getElementById('validate').addEventListener('click', evt => {
   const params = new URLSearchParams();
