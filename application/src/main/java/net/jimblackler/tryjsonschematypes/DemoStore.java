@@ -46,8 +46,8 @@ public class DemoStore {
           demo = demo + " (" + count + ")";
         }
         demos.add(demo);
-        schemaByDemo.put(demo, testFile);
-        documentByDemo.put(demo, testSchema);
+        documentByDemo.put(demo, testFile);
+        schemaByDemo.put(demo, testSchema);
       });
     });
   }
