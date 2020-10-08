@@ -7,6 +7,7 @@ import com.google.appengine.repackaged.com.google.common.collect.HashMultiset;
 import com.google.appengine.repackaged.com.google.common.collect.Multiset;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
@@ -59,12 +60,12 @@ public class DemoStore {
     return singleton;
   }
 
-  public Object getSchema(String demo) throws IOException {
-    return loadJson(getClass().getResourceAsStream(schemaByDemo.get(demo).toString()));
+  public InputStream getSchema(String demo) throws IOException {
+    return getClass().getResourceAsStream(schemaByDemo.get(demo).toString());
   }
 
-  public Object getDocument(String demo) throws IOException {
-    return loadJson(getClass().getResourceAsStream(documentByDemo.get(demo).toString()));
+  public InputStream getDocument(String demo) throws IOException {
+    return getClass().getResourceAsStream(documentByDemo.get(demo).toString());
   }
 
   public Iterable<String> getDemos() {
