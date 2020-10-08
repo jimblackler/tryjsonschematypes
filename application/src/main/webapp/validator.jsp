@@ -65,7 +65,8 @@
             Paste your own schema and document for validation in the editors below, or choose a demo
             from the <a href="https://www.schemastore.org/json/">JSON Schema Store</a>.</p>
           <div
-              class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height metaschema-textfield">
+              class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height metaschema-textfield"
+              id="demoSelector">
             <input type="text" value="" class="mdl-textfield__input" id="demo" readonly>
             <input type="hidden" value="" name="demo">
             <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>

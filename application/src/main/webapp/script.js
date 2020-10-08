@@ -49,6 +49,9 @@ const documentEditor =
 const jsonResults = initJsonEditor(document.getElementById('jsonResults'));
 jsonResults.setReadOnly(true);
 
+const demoSelector = document.getElementById('demoSelector');
+const demoProgress = document.getElementById('demoProgress');
+demoProgress.style.visibility = 'visible';
 withErrorHandling(fetch('allDemos.json'), json => {
   const demoList = document.getElementById('demoList');
   json.forEach(element => {
@@ -58,12 +61,12 @@ withErrorHandling(fetch('allDemos.json'), json => {
     li.appendChild(document.createTextNode(element));
     demoList.appendChild(li);
   });
-});
+  demoSelector.style.visibility = 'visible';
+}).finally(demoProgress.style.visibility = 'hidden');
 
 document.getElementById('demo').addEventListener('change', evt => {
   const demoFetch = new URL('demoData', document.location);
   demoFetch.searchParams.append('demo', evt.target.value);
-  const demoProgress = document.getElementById('demoProgress');
   demoProgress.style.visibility = 'visible';
   withErrorHandling(fetch(demoFetch), json => {
     schemaEditor.setValue(JSON.stringify(json.schema, null, '\t'), -1);
