@@ -86,7 +86,7 @@
             <input type="text" value="" class="mdl-textfield__input" id="metaschema" readonly>
             <input type="hidden" value="" name="metaschema">
             <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
-            <label for="metaschema" class="mdl-textfield__label">Metaschema</label>
+            <label for="metaschema" class="mdl-textfield__label">Meta-schema</label>
             <ul for="metaschema" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
               <li class="mdl-menu__item" data-val="http://json-schema.org/draft-03/schema#">
                 http://json-schema.org/draft-03/schema#

@@ -40,8 +40,53 @@ errorDialog.querySelector('.close').addEventListener('click', function() {
   errorDialog.close();
 });
 
-
 const schemaEditor = initJsonEditor(document.getElementById('schemaEditor'));
+let findSchemaTimer = null;
+schemaEditor.on('change', () => {
+  if (findSchemaTimer != null) {
+    clearTimeout(findSchemaTimer);
+  }
+  findSchemaTimer = setTimeout(() => {
+    let schemaData;
+    try {
+      schemaData = JSON.parse(schemaEditor.getValue());
+    } catch (e) {
+      return;
+    }
+    if ('$schema' in schemaData) {
+      const schema = schemaData['$schema'];
+      [...document.querySelectorAll('ul[for=metaschema] > li')].forEach(el => {
+        if (el.getAttribute('data-val') === schema) {
+          el.click();
+        }
+      });
+    }
+  }, 200);
+});
+
+const metaschema = document.getElementById('metaschema');
+metaschema.addEventListener('change', evt => {
+  let schemaData;
+  try {
+    schemaData = JSON.parse(`[${schemaEditor.getValue()}]`);
+  } catch (e) {
+    return;
+  }
+  if (schemaData.length === 0) {
+    schemaData = {};
+  } else if (schemaData.length === 1) {
+    schemaData = schemaData[0];
+  } else {
+    return;
+  }
+
+  if (schemaData['$schema'] === metaschema.value) {
+    return;
+  }
+  schemaData['$schema'] = metaschema.value;
+  schemaEditor.setValue(JSON.stringify(schemaData, null, '\t'), -1);
+});
+
 const documentEditor =
     initJsonEditor(document.getElementById('documentEditor'));
 const jsonResults = initJsonEditor(document.getElementById('jsonResults'));
@@ -69,8 +114,8 @@ window.onload = () => {
           const demoFetch = new URL('demoData', document.location);
           demoFetch.searchParams.append('demo', evt.target.value);
           demoProgress.style.visibility = 'visible';
-          documentEditor.setValue("");
-          schemaEditor.setValue("");
+          documentEditor.setValue('');
+          schemaEditor.setValue('');
           fetch(demoFetch)
               .then(handle500)
               .then(json => {
