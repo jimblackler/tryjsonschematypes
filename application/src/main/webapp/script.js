@@ -46,6 +46,7 @@ const documentEditor =
     initJsonEditor(document.getElementById('documentEditor'));
 const jsonResults = initJsonEditor(document.getElementById('jsonResults'));
 jsonResults.setReadOnly(true);
+jsonResults.setOption('showLineNumbers', false)
 
 const demoSelector = document.getElementById('demoSelector');
 const demoProgress = document.getElementById('demoProgress');
