@@ -44,11 +44,11 @@
         <a class="mdl-navigation__link" href="">Link</a>
       </nav>
     </div>
-    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-      <a href="#tab-1" class="mdl-layout__tab is-active">Validator</a>
-      <a href="#tab-2" class="mdl-layout__tab">Test data generator</a>
-      <a href="#tab-3" class="mdl-layout__tab">Java generator</a>
-      <a href="#tab-4" class="mdl-layout__tab">Typescript generator</a>
+    <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-layout__tab-manual-switch">
+      <a href="#validate" class="mdl-layout__tab is-active">Validator</a>
+      <a href="#generator" class="mdl-layout__tab">Test data generator</a>
+      <a href="#java" class="mdl-layout__tab">Java generator</a>
+      <a href="#typescript" class="mdl-layout__tab">Typescript generator</a>
     </div>
   </header>
   <div class="mdl-layout__drawer">
@@ -58,11 +58,18 @@
     <div class="mdl-grid">
       <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
         <div class="noncard mdl-shadow--2dp">
-          <p>An online application of
+          <p class="validate tab-content">An online application of
             <a href="https://github.com/jimblackler/jsonschematypes/tree/master/library">
               jsonschemafriend</a> a <a href="https://json-schema.org/">JSON Schema</a> Validator
             library written in Java by <a href="mailto:jimblackler@gmail.com">Jim Blackler</a>.
-            Paste your own schema and document for validation in the editors below, or choose a demo
+            Paste your own schema and document for validation in the editors below, or choose a
+            demo from the <a href="https://www.schemastore.org/json/">JSON Schema Store</a>.</p>
+          <p class="java tab-content">An online application of
+            <a href="https://github.com/jimblackler/jsonschematypes/tree/master/codegen">
+              jsonschematypes</a> a generator of Java classes to access JSON, based on its
+            <a href="https://json-schema.org/">JSON Schema</a>; a library written in Java by
+            <a href="mailto:jimblackler@gmail.com">Jim Blackler</a>.
+            Paste your own schema in the editor below, or choose a demo schema
             from the <a href="https://www.schemastore.org/json/">JSON Schema Store</a>.</p>
           <div
               class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height metaschema-textfield"
@@ -110,11 +117,13 @@
       </div>
       <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
         <div class="noncard compact">
-          <h4>Document</h4>
+          <h4 class="validate tab-content">Document</h4>
+          <h4 class="java tab-content">Java</h4>
           <div>
-            <button id="validate"
+            <button id="actionButton"
                     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-              Validate
+              <span class="validate tab-content">Validate</span>
+              <span class="java tab-content">Generate</span>
             </button>
             <div class="mdl-spinner mdl-js-spinner is-active aligned-spinner" id="validateProgress">
             </div>
@@ -126,23 +135,8 @@
       <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
         <div id="schemaEditor"></div>
       </div>
-
       <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
         <div id="documentEditor"></div>
-      </div>
-      <div class="mdl-cell mdl-cell--12-col">
-        <section class="mdl-layout__tab-panel is-active" id="tab-1">
-          <div class="page-content">1</div>
-        </section>
-        <section class="mdl-layout__tab-panel" id="tab-2">
-          <div class="page-content">2</div>
-        </section>
-        <section class="mdl-layout__tab-panel" id="tab-3">
-          <div class="page-content">3</div>
-        </section>
-        <section class="mdl-layout__tab-panel" id="tab-4">
-          <div class="page-content">4</div>
-        </section>
       </div>
     </div>
   </main>

@@ -22,6 +22,25 @@ function initJsonEditor(container) {
   });
 }
 
+function setTabSelection() {
+  [...document.getElementsByClassName('mdl-layout__tab')].forEach(element => {
+    element.classList.remove('is-active');
+    if (element.href === location.href) {
+      element.classList.add('is-active');
+    }
+  });
+  [...document.getElementsByClassName('tab-content')].forEach(element => {
+    element.style.display = 'none';
+  });
+  [...document.getElementsByClassName(location.hash.substring(1))].forEach(
+      element => {
+        element.style.display = null;
+      });
+}
+
+setTabSelection();
+window.addEventListener('hashchange', setTabSelection);
+
 const jsonDialog = document.getElementById('jsonDialog');
 if (!jsonDialog.showModal) {
   dialogPolyfill.registerDialog(jsonDialog);
@@ -137,7 +156,7 @@ window.onload = () => {
       .finally(() => demoProgress.style.visibility = 'hidden');
 };
 
-document.getElementById('validate').addEventListener('click', evt => {
+document.getElementById('actionButton').addEventListener('click', evt => {
   const params = new URLSearchParams();
   params.append('schema', schemaEditor.getValue());
   params.append('document', documentEditor.getValue());
