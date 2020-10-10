@@ -46,7 +46,7 @@ errorDialog.querySelector('.close').addEventListener('click', function() {
 
 const schemaEditor = ace.edit(document.getElementById('schemaEditor'), {
   mode: 'ace/mode/json',
-  theme: 'ace/theme/crimson_editor',
+  theme: 'ace/theme/katzenmilch',
   fontSize: '14px'
 });
 let findSchemaTimer = null;
@@ -109,7 +109,7 @@ demoProgress.style.visibility = 'visible';
 
 const documentEditor = ace.edit(document.getElementById('documentEditor'), {
   mode: 'ace/mode/json',
-  theme: 'ace/theme/crimson_editor',
+  theme: 'ace/theme/katzenmilch',
   fontSize: '14px'
 });
 
