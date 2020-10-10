@@ -15,6 +15,7 @@ dependencies {
     implementation 'javax.servlet:javax.servlet-api:4.0.1'
     implementation 'javax.servlet.jsp.jstl:jstl-api:1.2'
     implementation 'net.jimblackler:jsonschemafriend:0.7.9'
+    implementation 'net.jimblackler:codegen:0.7.9'
     implementation 'org.apache.taglibs:taglibs-standard-spec:1.2.5'
     implementation 'org.json:json:20200518'
 }

@@ -1,25 +1,6 @@
-function handle500(response) {
-  return response.json().then(response.ok ? json => json : json => {
-    throw new Error(json.message);
-  });
-}
-
 function showError(err) {
   document.getElementById('errorMessage').innerText = err.message;
   errorDialog.showModal();
-}
-
-/**
- * Initialize an Ace editor
- * @param container {HTMLElement}
- * @return The Ace editor.
- */
-function initJsonEditor(container) {
-  return ace.edit(container, {
-    mode: 'ace/mode/json',
-    theme: 'ace/theme/crimson_editor',
-    fontSize: '14px'
-  });
 }
 
 function setTabSelection() {
@@ -36,6 +17,10 @@ function setTabSelection() {
       element => {
         element.style.display = null;
       });
+}
+
+if (!location.hash) {
+  location.hash = '#validate';
 }
 
 setTabSelection();
@@ -59,7 +44,11 @@ errorDialog.querySelector('.close').addEventListener('click', function() {
   errorDialog.close();
 });
 
-const schemaEditor = initJsonEditor(document.getElementById('schemaEditor'));
+const schemaEditor = ace.edit(document.getElementById('schemaEditor'), {
+  mode: 'ace/mode/json',
+  theme: 'ace/theme/crimson_editor',
+  fontSize: '14px'
+});
 let findSchemaTimer = null;
 schemaEditor.on('change', () => {
   if (findSchemaTimer != null) {
@@ -106,19 +95,38 @@ metaschema.addEventListener('change', evt => {
   schemaEditor.setValue(JSON.stringify(schemaData, null, '\t'), -1);
 });
 
-const documentEditor =
-    initJsonEditor(document.getElementById('documentEditor'));
-const jsonResults = initJsonEditor(document.getElementById('jsonResults'));
-jsonResults.setReadOnly(true);
-jsonResults.setOption('showLineNumbers', false)
+const jsonResults = ace.edit(document.getElementById('jsonResults'), {
+  mode: 'ace/mode/json',
+  theme: 'ace/theme/crimson_editor',
+  fontSize: '14px',
+  showLineNumbers: false,
+  readOnly: true
+});
 
 const demoSelector = document.getElementById('demoSelector');
 const demoProgress = document.getElementById('demoProgress');
 demoProgress.style.visibility = 'visible';
 
+const documentEditor = ace.edit(document.getElementById('documentEditor'), {
+  mode: 'ace/mode/json',
+  theme: 'ace/theme/crimson_editor',
+  fontSize: '14px'
+});
+
+const javaEditor = ace.edit(document.getElementById('javaEditor'), {
+  mode: 'ace/mode/java',
+  theme: 'ace/theme/crimson_editor',
+  fontSize: '14px',
+  readOnly: true
+});
+
 window.onload = () => {
   fetch('allDemos.json')
-      .then(handle500)
+      .then(
+          response =>
+              response.ok ? response.json() : response.json().then(json => {
+                throw new Error(json.message);
+              }))
       .then(json => {
         const demoList = document.getElementById('demoList');
         json.forEach(element => {
@@ -133,17 +141,25 @@ window.onload = () => {
           const demoFetch = new URL('demoData', document.location);
           demoFetch.searchParams.append('demo', evt.target.value);
           demoProgress.style.visibility = 'visible';
-          documentEditor.setValue('');
           schemaEditor.setValue('');
+          documentEditor.setValue('');
           fetch(demoFetch)
-              .then(handle500)
+              .then(
+                  response => response.ok ? response.json() :
+                                            response.json().then(json => {
+                                              throw new Error(json.message);
+                                            }))
               .then(json => {
                 documentEditor.setValue(JSON.stringify(json, null, '\t'), -1);
                 const schemaFetch = new URL('demoSchema', document.location);
                 schemaFetch.searchParams.append('demo', evt.target.value);
                 return fetch(schemaFetch);
               })
-              .then(handle500)
+              .then(
+                  response => response.ok ? response.json() :
+                                            response.json().then(json => {
+                                              throw new Error(json.message);
+                                            }))
               .then(json => {
                 schemaEditor.setValue(JSON.stringify(json, null, '\t'), -1);
               })
@@ -157,23 +173,51 @@ window.onload = () => {
 };
 
 document.getElementById('actionButton').addEventListener('click', evt => {
+  const actionProgress = document.getElementById('actionProgress');
+  actionProgress.style.visibility = 'visible';
+
   const params = new URLSearchParams();
   params.append('schema', schemaEditor.getValue());
-  params.append('document', documentEditor.getValue());
-  const validateProgress = document.getElementById('validateProgress');
-  validateProgress.style.visibility = 'visible';
 
-  fetch('validate', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    body: params.toString()
-  })
-      .then(handle500)
-      .then(json => {
-        document.getElementById('result').innerText = json.result;
-        jsonResults.setValue(JSON.stringify(json.validation, null, '\t'), -1);
-        jsonDialog.showModal();
+  switch (location.hash) {
+    case '#validate':
+      params.append('document', documentEditor.getValue());
+      fetch('validate', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: params.toString()
       })
-      .catch(showError)
-      .finally(() => validateProgress.style.visibility = 'hidden');
+          .then(
+              response =>
+                  response.ok ? response.json() : response.json().then(json => {
+                    throw new Error(json.message);
+                  }))
+          .then(json => {
+            document.getElementById('result').innerText = json.result;
+            jsonResults.setValue(
+                JSON.stringify(json.validation, null, '\t'), -1);
+            jsonDialog.showModal();
+          })
+          .catch(showError)
+          .finally(() => actionProgress.style.visibility = 'hidden');
+      break;
+    case '#java':
+      params.append('document', documentEditor.getValue());
+      fetch('java', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: params.toString()
+      })
+          .then(
+              response =>
+                  response.ok ? response.text() : response.json().then(json => {
+                    throw new Error(json.message);
+                  }))
+          .then(text => {
+            javaEditor.setValue(text, -1);
+          })
+          .catch(showError)
+          .finally(() => actionProgress.style.visibility = 'hidden');
+      break;
+  }
 });
