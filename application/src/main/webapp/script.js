@@ -146,24 +146,14 @@ window.onload = () => {
         getmdlSelect.init('#demoSelector');
         document.getElementById('demo').addEventListener('change', evt => {
           const demoFetch = new URL('demoData', document.location);
-          demoFetch.searchParams.append('demo', evt.target.value);
-          demoProgress.style.visibility = 'visible';
           schemaEditor.setValue('');
           documentEditor.setValue('');
           javaEditor.setValue('');
           typeScriptEditor.setValue('');
-          fetch(demoFetch)
-              .then(
-                  response => response.ok ? response.json() :
-                                            response.json().then(json => {
-                                              throw new Error(json.message);
-                                            }))
-              .then(json => {
-                documentEditor.setValue(JSON.stringify(json, null, '\t'), -1);
-                const schemaFetch = new URL('demoSchema', document.location);
-                schemaFetch.searchParams.append('demo', evt.target.value);
-                return fetch(schemaFetch);
-              })
+          demoProgress.style.visibility = 'visible';
+          const schemaFetch = new URL('demoSchema', document.location);
+          schemaFetch.searchParams.append('demo', evt.target.value);
+          fetch(schemaFetch)
               .then(
                   response => response.ok ? response.json() :
                                             response.json().then(json => {
@@ -171,6 +161,17 @@ window.onload = () => {
                                             }))
               .then(json => {
                 schemaEditor.setValue(JSON.stringify(json, null, '\t'), -1);
+                if (location.hash !== '#generate') {
+                  demoFetch.searchParams.append('demo', evt.target.value);
+                  return fetch(demoFetch).then(
+                      response => response.ok ? response.json() :
+                          response.json().then(json => {
+                            throw new Error(json.message);
+                          }))
+                      .then(json => {
+                        documentEditor.setValue(JSON.stringify(json, null, '\t'), -1);
+                      });
+                }
               })
               .catch(showError)
               .finally(() => demoProgress.style.visibility = 'hidden');
@@ -206,6 +207,24 @@ document.getElementById('actionButton').addEventListener('click', evt => {
             jsonResults.setValue(
                 JSON.stringify(json.validation, null, '\t'), -1);
             jsonDialog.showModal();
+          })
+          .catch(showError)
+          .finally(() => actionProgress.style.visibility = 'hidden');
+      break;
+    case '#generate':
+      documentEditor.setValue('');
+      fetch('generate', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: params.toString()
+      })
+          .then(
+              response =>
+                  response.ok ? response.json() : response.json().then(json => {
+                    throw new Error(json.message);
+                  }))
+          .then(json => {
+            documentEditor.setValue(JSON.stringify(json.generated, null, '\t'), -1);
           })
           .catch(showError)
           .finally(() => actionProgress.style.visibility = 'hidden');

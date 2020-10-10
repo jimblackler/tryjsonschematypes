@@ -46,7 +46,7 @@
     </div>
     <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-layout__tab-manual-switch">
       <a href="#validate" class="mdl-layout__tab is-active">Validator</a>
-      <a href="#generator" class="mdl-layout__tab">Test data generator</a>
+      <a href="#generate" class="mdl-layout__tab">Test data generator</a>
       <a href="#java" class="mdl-layout__tab">Java generator</a>
       <a href="#typescript" class="mdl-layout__tab">Typescript generator</a>
     </div>
@@ -64,17 +64,24 @@
             library written in Java by <a href="mailto:jimblackler@gmail.com">Jim Blackler</a>.
             Paste your own schema and document for validation in the editors below, or choose a
             demo from the <a href="https://www.schemastore.org/json/">JSON Schema Store</a>.</p>
-          <p class="java tab-content">An online application of
+          <p class="java tab-content">An online application of Java library
             <a href="https://github.com/jimblackler/jsonschematypes/tree/master/codegen">
               jsonschematypes</a> a generator of Java classes to access JSON, based on its
-            <a href="https://json-schema.org/">JSON Schema</a>; a library written in Java by
+            <a href="https://json-schema.org/">JSON Schema</a>. Written by
             <a href="mailto:jimblackler@gmail.com">Jim Blackler</a>.
             Paste your own schema in the editor below, or choose a demo schema
             from the <a href="https://www.schemastore.org/json/">JSON Schema Store</a>.</p>
-          <p class="typescript tab-content">An online application of
+          <p class="generate tab-content">An online application of Java libary
+            <a href="https://github.com/jimblackler/jsongenerator">
+              jsongenerator</a> a generator of test/example JSON objects that match a
+            <a href="https://json-schema.org/">JSON Schema</a>. Written by
+            <a href="mailto:jimblackler@gmail.com">Jim Blackler</a>.
+            Paste your own schema in the editor below, or choose a demo schema
+            from the <a href="https://www.schemastore.org/json/">JSON Schema Store</a>.</p>
+          <p class="typescript tab-content">An online application of Java libary
             <a href="https://github.com/jimblackler/jsonschematypes/tree/master/codegen">
               jsonschematypes</a> a generator of TypeScript classes to access JSON, based on its
-            <a href="https://json-schema.org/">JSON Schema</a>; a library written in Java by
+            <a href="https://json-schema.org/">JSON Schema</a>. Written by
             <a href="mailto:jimblackler@gmail.com">Jim Blackler</a>.
             Paste your own schema in the editor below, or choose a demo schema
             from the <a href="https://www.schemastore.org/json/">JSON Schema Store</a>.</p>
@@ -124,14 +131,14 @@
       </div>
       <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
         <div class="noncard compact">
-          <h4 class="validate tab-content">Document</h4>
+          <h4 class="validate generate tab-content">Document</h4>
           <h4 class="java tab-content">Java</h4>
           <h4 class="typescript tab-content">TypeScript</h4>
           <div>
             <button id="actionButton"
                     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
               <span class="validate tab-content">Validate</span>
-              <span class="java typescript tab-content">Generate</span>
+              <span class="java generate typescript tab-content">Generate</span>
             </button>
             <div class="mdl-spinner mdl-js-spinner is-active aligned-spinner" id="actionProgress">
             </div>
@@ -144,7 +151,7 @@
         <div id="schemaEditor"></div>
       </div>
       <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
-        <div class="validate generator tab-content" id="documentEditor"></div>
+        <div class="validate generate tab-content" id="documentEditor"></div>
         <div class="java tab-content" id="javaEditor"></div>
         <div class="typescript tab-content" id="typeScriptEditor"></div>
       </div>
