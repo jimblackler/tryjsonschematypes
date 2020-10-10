@@ -71,6 +71,13 @@
             <a href="mailto:jimblackler@gmail.com">Jim Blackler</a>.
             Paste your own schema in the editor below, or choose a demo schema
             from the <a href="https://www.schemastore.org/json/">JSON Schema Store</a>.</p>
+          <p class="typescript tab-content">An online application of
+            <a href="https://github.com/jimblackler/jsonschematypes/tree/master/codegen">
+              jsonschematypes</a> a generator of TypeScript classes to access JSON, based on its
+            <a href="https://json-schema.org/">JSON Schema</a>; a library written in Java by
+            <a href="mailto:jimblackler@gmail.com">Jim Blackler</a>.
+            Paste your own schema in the editor below, or choose a demo schema
+            from the <a href="https://www.schemastore.org/json/">JSON Schema Store</a>.</p>
           <div
               class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height metaschema-textfield"
               id="demoSelector">
@@ -119,11 +126,12 @@
         <div class="noncard compact">
           <h4 class="validate tab-content">Document</h4>
           <h4 class="java tab-content">Java</h4>
+          <h4 class="typescript tab-content">TypeScript</h4>
           <div>
             <button id="actionButton"
                     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
               <span class="validate tab-content">Validate</span>
-              <span class="java tab-content">Generate</span>
+              <span class="java typescript tab-content">Generate</span>
             </button>
             <div class="mdl-spinner mdl-js-spinner is-active aligned-spinner" id="actionProgress">
             </div>
@@ -138,6 +146,7 @@
       <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--2-col-phone">
         <div class="validate generator tab-content" id="documentEditor"></div>
         <div class="java tab-content" id="javaEditor"></div>
+        <div class="typescript tab-content" id="typeScriptEditor"></div>
       </div>
     </div>
   </main>

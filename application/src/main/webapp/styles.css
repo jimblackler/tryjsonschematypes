@@ -39,7 +39,7 @@
   height: 600px;
 }
 
-#documentEditor, #javaEditor {
+#documentEditor, #javaEditor, #typeScriptEditor {
   height: 600px;
 }
 

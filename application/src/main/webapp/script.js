@@ -120,6 +120,13 @@ const javaEditor = ace.edit(document.getElementById('javaEditor'), {
   readOnly: true
 });
 
+const typeScriptEditor = ace.edit(document.getElementById('typeScriptEditor'), {
+  mode: 'ace/mode/typescript',
+  theme: 'ace/theme/crimson_editor',
+  fontSize: '14px',
+  readOnly: true
+});
+
 window.onload = () => {
   fetch('allDemos.json')
       .then(
@@ -143,6 +150,8 @@ window.onload = () => {
           demoProgress.style.visibility = 'visible';
           schemaEditor.setValue('');
           documentEditor.setValue('');
+          javaEditor.setValue('');
+          typeScriptEditor.setValue('');
           fetch(demoFetch)
               .then(
                   response => response.ok ? response.json() :
@@ -215,6 +224,24 @@ document.getElementById('actionButton').addEventListener('click', evt => {
                   }))
           .then(text => {
             javaEditor.setValue(text, -1);
+          })
+          .catch(showError)
+          .finally(() => actionProgress.style.visibility = 'hidden');
+      break;
+    case '#typescript':
+      params.append('document', documentEditor.getValue());
+      fetch('typescript', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: params.toString()
+      })
+          .then(
+              response =>
+                  response.ok ? response.text() : response.json().then(json => {
+                    throw new Error(json.message);
+                  }))
+          .then(text => {
+            typeScriptEditor.setValue(text, -1);
           })
           .catch(showError)
           .finally(() => actionProgress.style.visibility = 'hidden');
