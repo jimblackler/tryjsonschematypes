@@ -26,7 +26,6 @@ public class Java extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    JSONObject out = new JSONObject();
     response.setContentType("text/x-java-source");
     try {
       Object schemaObject = parseJson(request.getParameter("schema"));
