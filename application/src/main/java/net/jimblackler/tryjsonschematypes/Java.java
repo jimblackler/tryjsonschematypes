@@ -17,7 +17,6 @@ import net.jimblackler.jsonschemafriend.SchemaStore;
 import net.jimblackler.jsonschematypes.codegen.CodeGenerationException;
 import net.jimblackler.jsonschematypes.codegen.JavaCodeGenerator;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 @WebServlet(value = "/java")
 public class Java extends HttpServlet {
