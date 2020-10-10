@@ -26,6 +26,7 @@ public class ExceptionFilter implements Filter {
         throw new ServletException(ex);
       }
     } catch (ServletException ex) {
+      ex.printStackTrace();
       JSONObject structuredError = new JSONObject();
       structuredError.put("message", ex.getMessage());
       Throwable rootCause = ex.getRootCause();
