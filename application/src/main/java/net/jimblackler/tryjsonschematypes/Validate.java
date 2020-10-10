@@ -17,7 +17,7 @@ import net.jimblackler.jsonschemafriend.Validator;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-@WebServlet(name = "Validate", value = "/validate")
+@WebServlet(value = "/validate")
 public class Validate extends HttpServlet {
   public Validate() {}
 
