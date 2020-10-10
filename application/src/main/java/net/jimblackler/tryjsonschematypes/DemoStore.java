@@ -1,6 +1,5 @@
 package net.jimblackler.tryjsonschematypes;
 
-import static net.jimblackler.jsonschemafriend.DocumentUtils.loadJson;
 import static net.jimblackler.tryjsonschematypes.ReaderUtils.getLines;
 
 import com.google.appengine.repackaged.com.google.common.collect.HashMultiset;
