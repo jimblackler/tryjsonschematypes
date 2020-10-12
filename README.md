@@ -1,4 +1,4 @@
-A website to demonstrate:
+A website - live at https://tryjsonschematypes.appspot.com/ - to demonstrate:
 
 *   A [JSON Schema](https://json-schema.org/) validator that can also be used as
     a schema parsing library for projects related to JSON Schemas:
