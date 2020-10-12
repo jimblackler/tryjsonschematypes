@@ -49,27 +49,30 @@ const schemaEditor = ace.edit(document.getElementById('schemaEditor'), {
   theme: 'ace/theme/katzenmilch',
   fontSize: '14px'
 });
+
+function findSchema() {
+  let schemaData;
+  try {
+    schemaData = JSON.parse(schemaEditor.getValue());
+  } catch (e) {
+    return;
+  }
+  if ('$schema' in schemaData) {
+    const schema = schemaData['$schema'];
+    [...document.querySelectorAll('ul[for=metaschema] > li')].forEach(el => {
+      if (el.getAttribute('data-val') === schema) {
+        el.click();
+      }
+    });
+  }
+}
+
 let findSchemaTimer = null;
 schemaEditor.on('change', () => {
   if (findSchemaTimer != null) {
     clearTimeout(findSchemaTimer);
   }
-  findSchemaTimer = setTimeout(() => {
-    let schemaData;
-    try {
-      schemaData = JSON.parse(schemaEditor.getValue());
-    } catch (e) {
-      return;
-    }
-    if ('$schema' in schemaData) {
-      const schema = schemaData['$schema'];
-      [...document.querySelectorAll('ul[for=metaschema] > li')].forEach(el => {
-        if (el.getAttribute('data-val') === schema) {
-          el.click();
-        }
-      });
-    }
-  }, 200);
+  findSchemaTimer = setTimeout(findSchema, 200);
 });
 
 const metaschema = document.getElementById('metaschema');
@@ -161,6 +164,7 @@ window.onload = () => {
                                             }))
               .then(json => {
                 schemaEditor.setValue(JSON.stringify(json, null, '\t'), -1);
+                findSchema();
                 if (location.hash !== '#generate') {
                   demoFetch.searchParams.append('demo', evt.target.value);
                   return fetch(demoFetch).then(
