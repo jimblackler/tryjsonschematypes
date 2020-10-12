@@ -60,7 +60,7 @@ public class Generate extends HttpServlet {
     } catch (StandardGenerationException e) {
       out.put("result", "Schema did not validate against metaschema");
       out.put("validation", e.getStandardOutput());
-    } catch (JSONException | GenerationException | JsonGeneratorException | MissingPathException e) {
+    } catch (JSONException | GenerationException | JsonGeneratorException e) {
       throw new ServletException(e);
     }
 
