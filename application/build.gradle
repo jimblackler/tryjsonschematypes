@@ -12,7 +12,6 @@ version = '0.3'
 
 dependencies {
     implementation 'com.google.appengine:appengine-api-1.0-sdk:1.9.82'
-    implementation 'javax.servlet.jsp.jstl:jstl-api:1.2'
     implementation 'javax.servlet:javax.servlet-api:4.0.1'
     implementation 'net.jimblackler:codegen:0.7.12'
     implementation 'net.jimblackler:jsongenerator:0.4.1'
