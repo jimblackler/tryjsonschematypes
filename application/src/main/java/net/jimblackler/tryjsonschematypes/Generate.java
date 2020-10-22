@@ -1,26 +1,24 @@
 package net.jimblackler.tryjsonschematypes;
 
-import net.jimblackler.jsongenerator.Configuration;
-import net.jimblackler.jsongenerator.Generator;
-import net.jimblackler.jsongenerator.JsonGeneratorException;
-import net.jimblackler.jsonschemafriend.GenerationException;
-import net.jimblackler.jsonschemafriend.MissingPathException;
-import net.jimblackler.jsonschemafriend.Schema;
-import net.jimblackler.jsonschemafriend.SchemaStore;
-import net.jimblackler.jsonschemafriend.StandardGenerationException;
-import org.json.JSONException;
-import org.json.JSONObject;
+import static net.jimblackler.jsonschemafriend.DocumentUtils.parseJson;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Random;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Random;
-
-import static net.jimblackler.jsonschemafriend.DocumentUtils.parseJson;
+import net.jimblackler.jsongenerator.Configuration;
+import net.jimblackler.jsongenerator.Generator;
+import net.jimblackler.jsongenerator.JsonGeneratorException;
+import net.jimblackler.jsonschemafriend.GenerationException;
+import net.jimblackler.jsonschemafriend.Schema;
+import net.jimblackler.jsonschemafriend.SchemaStore;
+import net.jimblackler.jsonschemafriend.StandardGenerationException;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 @WebServlet(value = "/generate")
 public class Generate extends HttpServlet {
