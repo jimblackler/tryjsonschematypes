@@ -39,7 +39,7 @@
   height: 600px;
 }
 
-#documentEditor, #javaEditor, #typeScriptEditor {
+#documentEditor, #javaEditor, #typeScriptEditor, #json5Editor {
   height: 600px;
 }
 

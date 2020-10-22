@@ -50,6 +50,12 @@ const schemaEditor = ace.edit(document.getElementById('schemaEditor'), {
   fontSize: '14px'
 });
 
+const json5editor = ace.edit(document.getElementById('json5Editor'), {
+  mode: 'ace/mode/json5',
+  theme: 'ace/theme/xcode',
+  fontSize: '14px'
+});
+
 function findSchema() {
   let schemaData;
   try {
@@ -191,10 +197,11 @@ document.getElementById('actionButton').addEventListener('click', evt => {
   actionProgress.style.visibility = 'visible';
 
   const params = new URLSearchParams();
-  params.append('schema', schemaEditor.getValue());
+
 
   switch (location.hash) {
     case '#validate':
+      params.append('schema', schemaEditor.getValue());
       params.append('document', documentEditor.getValue());
       fetch('validate', {
         method: 'POST',
@@ -216,6 +223,7 @@ document.getElementById('actionButton').addEventListener('click', evt => {
           .finally(() => actionProgress.style.visibility = 'hidden');
       break;
     case '#generate':
+      params.append('schema', schemaEditor.getValue());
       documentEditor.setValue('');
       fetch('generate', {
         method: 'POST',
@@ -234,6 +242,7 @@ document.getElementById('actionButton').addEventListener('click', evt => {
           .finally(() => actionProgress.style.visibility = 'hidden');
       break;
     case '#java':
+      params.append('schema', schemaEditor.getValue());
       params.append('document', documentEditor.getValue());
       fetch('java', {
         method: 'POST',
@@ -252,6 +261,7 @@ document.getElementById('actionButton').addEventListener('click', evt => {
           .finally(() => actionProgress.style.visibility = 'hidden');
       break;
     case '#typescript':
+      params.append('schema', schemaEditor.getValue());
       params.append('document', documentEditor.getValue());
       fetch('typescript', {
         method: 'POST',
@@ -269,5 +279,24 @@ document.getElementById('actionButton').addEventListener('click', evt => {
           .catch(showError)
           .finally(() => actionProgress.style.visibility = 'hidden');
       break;
+    case '#json5':
+      params.append('json5', json5editor.getValue());
+      fetch('json5', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: params.toString()
+      })
+          .then(
+              response =>
+                  response.ok ? response.text() : response.json().then(json => {
+                    throw new Error(json.message);
+                  }))
+          .then(text => {
+            documentEditor.setValue(text, -1);
+          })
+          .catch(showError)
+          .finally(() => actionProgress.style.visibility = 'hidden');
+      break;
+
   }
 });
