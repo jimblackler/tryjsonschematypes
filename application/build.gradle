@@ -19,3 +19,20 @@ dependencies {
     implementation 'org.apache.taglibs:taglibs-standard-spec:1.2.5'
     implementation 'org.json:json:20200518'
 }
+
+sourceSets {
+    main {
+        resources {
+            srcDir 'resources'
+        }
+    }
+}
+
+appengine {
+    run {
+        automaticRestart = true
+    }
+    deploy {
+        projectId = 'tryjsonschematypes'
+    }
+}
