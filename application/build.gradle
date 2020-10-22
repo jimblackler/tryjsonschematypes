@@ -33,6 +33,8 @@ appengine {
         automaticRestart = true
     }
     deploy {
+        version = 'GCLOUD_CONFIG'
         projectId = 'tryjsonschematypes'
+        promote = false
     }
 }
