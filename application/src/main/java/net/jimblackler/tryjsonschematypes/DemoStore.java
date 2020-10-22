@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class DemoStore {
   private static final FileSystem FILE_SYSTEM = FileSystems.getDefault();
-  static private DemoStore singleton = null;
+  private static DemoStore singleton;
   private final List<String> demos = new ArrayList<>();
   private final Multiset<String> nameUse = HashMultiset.create();
   private final Map<String, Path> schemaByDemo = new HashMap<String, Path>();
