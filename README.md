@@ -12,5 +12,7 @@ A website - live at https://tryjsonschematypes.appspot.com/ - to demonstrate:
 
 *   An example / test [JSON generator](https://github.com/jimblackler/jsongenerator).
 
+*   A [JSON5/JSON parser](https://github.com/jimblackler/usejson).
+
 All projects and the website are written by jimblackler@gmail.com and offered
 under an [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0).
