@@ -1,16 +1,14 @@
 package net.jimblackler.tryjsonschematypes;
 
-import static net.jimblackler.jsonschemafriend.DocumentUtils.parseJson;
-
+import com.google.appengine.repackaged.com.google.gson.Gson;
+import com.google.appengine.repackaged.com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.jimblackler.jsonschemafriend.DocumentUtils;
-import org.json.JSONException;
+import net.jimblackler.usejson.Json5Parser;
 
 @WebServlet(value = "/json5")
 public class Json5 extends HttpServlet {
@@ -18,14 +16,11 @@ public class Json5 extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+      throws IOException {
     response.setContentType("text/json");
-    try {
-      Object json = parseJson(request.getParameter("json5"));
-      PrintWriter writer = response.getWriter();
-      writer.print(DocumentUtils.toString(json));
-    } catch (JSONException e) {
-      throw new ServletException(e);
-    }
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    Object json = new Json5Parser().parse(request.getParameter("json5"));
+    PrintWriter writer = response.getWriter();
+    writer.print(gson.toJson(json));
   }
 }

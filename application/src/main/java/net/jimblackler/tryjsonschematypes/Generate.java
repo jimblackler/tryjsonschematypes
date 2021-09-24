@@ -1,9 +1,10 @@
 package net.jimblackler.tryjsonschematypes;
 
-import static net.jimblackler.jsonschemafriend.DocumentUtils.parseJson;
-
+import com.google.appengine.repackaged.com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Random;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,8 +18,7 @@ import net.jimblackler.jsonschemafriend.GenerationException;
 import net.jimblackler.jsonschemafriend.Schema;
 import net.jimblackler.jsonschemafriend.SchemaStore;
 import net.jimblackler.jsonschemafriend.StandardGenerationException;
-import org.json.JSONException;
-import org.json.JSONObject;
+import net.jimblackler.usejson.Json5Parser;
 
 @WebServlet(value = "/generate")
 public class Generate extends HttpServlet {
@@ -27,10 +27,10 @@ public class Generate extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    JSONObject out = new JSONObject();
+    Map<String, Object> out = new LinkedHashMap<>();
     response.setContentType("text/json");
     try {
-      Object schemaObject = parseJson(request.getParameter("schema"));
+      Object schemaObject = new Json5Parser().parse(request.getParameter("schema"));
       SchemaStore schemaStore = new SchemaStore();
       Schema schema = schemaStore.loadSchema(schemaObject);
       Object generated = new Generator(new Configuration() {
@@ -58,11 +58,11 @@ public class Generate extends HttpServlet {
     } catch (StandardGenerationException e) {
       out.put("result", "Schema did not validate against metaschema");
       out.put("validation", e.getStandardOutput());
-    } catch (JSONException | GenerationException | JsonGeneratorException e) {
+    } catch (GenerationException | JsonGeneratorException e) {
       throw new ServletException(e);
     }
 
     PrintWriter writer = response.getWriter();
-    writer.print(out.toString(2));
+    writer.print(new Gson().toJson(out));
   }
 }

@@ -1,6 +1,5 @@
 package net.jimblackler.tryjsonschematypes;
 
-import static net.jimblackler.jsonschemafriend.DocumentUtils.parseJson;
 import static net.jimblackler.tryjsonschematypes.StreamUtils.transfer;
 
 import java.io.ByteArrayInputStream;
@@ -15,7 +14,7 @@ import net.jimblackler.jsonschemafriend.GenerationException;
 import net.jimblackler.jsonschemafriend.Schema;
 import net.jimblackler.jsonschemafriend.SchemaStore;
 import net.jimblackler.jsonschematypes.codegen.TypeScriptCodeGenerator;
-import org.json.JSONException;
+import net.jimblackler.usejson.Json5Parser;
 
 @WebServlet(value = "/typescript")
 public class TypeScript extends HttpServlet {
@@ -26,7 +25,7 @@ public class TypeScript extends HttpServlet {
       throws ServletException, IOException {
     response.setContentType("application/x-typescript");
     try {
-      Object schemaObject = parseJson(request.getParameter("schema"));
+      Object schemaObject = new Json5Parser().parse(request.getParameter("schema"));
       SchemaStore schemaStore = new SchemaStore();
       Schema schema = schemaStore.loadSchema(schemaObject);
 
@@ -40,7 +39,7 @@ public class TypeScript extends HttpServlet {
       } else {
         typeScriptCodeGenerator.output(response.getOutputStream());
       }
-    } catch (JSONException | GenerationException e) {
+    } catch (GenerationException e) {
       throw new ServletException(e);
     }
   }

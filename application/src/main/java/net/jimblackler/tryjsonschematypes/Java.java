@@ -1,6 +1,5 @@
 package net.jimblackler.tryjsonschematypes;
 
-import static net.jimblackler.jsonschemafriend.DocumentUtils.parseJson;
 import static net.jimblackler.tryjsonschematypes.StreamUtils.transfer;
 
 import java.io.ByteArrayInputStream;
@@ -16,7 +15,7 @@ import net.jimblackler.jsonschemafriend.Schema;
 import net.jimblackler.jsonschemafriend.SchemaStore;
 import net.jimblackler.jsonschematypes.codegen.CodeGenerationException;
 import net.jimblackler.jsonschematypes.codegen.JavaCodeGenerator;
-import org.json.JSONException;
+import net.jimblackler.usejson.Json5Parser;
 
 @WebServlet(value = "/java")
 public class Java extends HttpServlet {
@@ -27,11 +26,11 @@ public class Java extends HttpServlet {
       throws ServletException, IOException {
     response.setContentType("text/x-java-source");
     try {
-      Object schemaObject = parseJson(request.getParameter("schema"));
+      Object schemaObject = new Json5Parser().parse(request.getParameter("schema"));
       SchemaStore schemaStore = new SchemaStore();
       Schema schema = schemaStore.loadSchema(schemaObject);
 
-      JavaCodeGenerator javaCodeGenerator = new JavaCodeGenerator("com.example");
+      JavaCodeGenerator javaCodeGenerator = new JavaCodeGenerator("com.example", "map");
       javaCodeGenerator.build(schema);
 
       if (false) {
@@ -42,7 +41,7 @@ public class Java extends HttpServlet {
         javaCodeGenerator.output(response.getOutputStream());
       }
 
-    } catch (JSONException | GenerationException | CodeGenerationException e) {
+    } catch (GenerationException | CodeGenerationException e) {
       throw new ServletException(e);
     }
   }

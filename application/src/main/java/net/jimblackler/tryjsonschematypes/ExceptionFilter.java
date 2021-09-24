@@ -1,6 +1,9 @@
 package net.jimblackler.tryjsonschematypes;
 
+import com.google.appengine.repackaged.com.google.gson.Gson;
 import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -9,7 +12,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
-import org.json.JSONObject;
 
 @WebFilter("*")
 public class ExceptionFilter implements Filter {
@@ -27,7 +29,7 @@ public class ExceptionFilter implements Filter {
       }
     } catch (ServletException ex) {
       ex.printStackTrace();
-      JSONObject structuredError = new JSONObject();
+      Map<String, Object> structuredError = new LinkedHashMap<>();
       structuredError.put("message", ex.getMessage());
       Throwable rootCause = ex.getRootCause();
       if (rootCause != null) {
@@ -35,7 +37,7 @@ public class ExceptionFilter implements Filter {
       }
       ((HttpServletResponse) response).setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
       response.setContentType("text/json");
-      response.getWriter().write(structuredError.toString());
+      response.getWriter().write(new Gson().toJson(structuredError));
     }
   }
 }
